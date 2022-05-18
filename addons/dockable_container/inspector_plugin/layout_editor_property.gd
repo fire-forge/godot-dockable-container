@@ -12,7 +12,8 @@ var _hidden_menu_list: PoolStringArray
 func _ready() -> void:
 	rect_min_size = Vector2(128, 256)
 
-	_hidden_menu_button.text = "Visible nodes"
+	_hidden_menu_button.text = "Visible Nodes"
+	_hidden_menu_button.clip_text = true
 	add_child(_hidden_menu_button)
 	_hidden_menu_popup = _hidden_menu_button.get_popup()
 	_hidden_menu_popup.hide_on_checkable_item_selection = false
@@ -30,6 +31,9 @@ func _ready() -> void:
 		_container.add_child(child)
 	add_child(_container)
 	set_bottom_editor(_container)
+
+	original_container.connect("draw", self, "_on_original_container_update", [original_container])
+	_on_original_container_update(original_container)
 
 
 func update_property() -> void:
@@ -50,6 +54,10 @@ func _create_child_control(named: String) -> Control:
 	new_control.clip_text = true
 	new_control.text = named
 	return new_control
+
+
+func _on_original_container_update(original_container: DockableContainer) -> void:
+	_container.tab_align = original_container.tab_align
 
 
 func _on_hidden_menu_popup_about_to_show() -> void:

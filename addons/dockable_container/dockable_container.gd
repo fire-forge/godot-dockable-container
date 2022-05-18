@@ -174,6 +174,7 @@ func set_tab_align(value: int) -> void:
 	for i in range(1, _panel_container.get_child_count()):
 		var panel = _panel_container.get_child(i)
 		panel.tab_align = value
+	update()
 
 
 func get_tab_align() -> int:
@@ -185,6 +186,7 @@ func set_tabs_visible(value: bool) -> void:
 	for i in range(1, _panel_container.get_child_count()):
 		var panel = _panel_container.get_child(i)
 		panel.tabs_visible = value
+	update()
 
 
 func get_tabs_visible() -> bool:
